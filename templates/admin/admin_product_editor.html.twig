@@ -1,0 +1,57 @@
+{% extends 'admin/admin_base_layout.html.twig' %}
+{% block title %}{{ title }}{% endblock title %}
+
+{% block admin_content %}
+    <header class="mb-4 d-flex flex-column align-items-start flex-md-row align-items-md-center">
+        <h1>{{ title }}</h1>
+        {% if form.vars.data.id is not empty %}
+            <a href="{{ path('admin_product_delete"', {'id': form.vars.data.id }) }}" class="delete-product btn btn-danger ml-md-4">Remove</a>
+        {% endif %}
+    </header>
+
+    {{ form_start(form) }}
+    {{ form_row(form.name, {
+        'label': 'Name',
+    }) }}
+    {{ form_row(form.description, {
+        'label': 'Description',
+    }) }}
+    {{ form_row(form.category, {
+        'label': 'Category',
+    }) }}
+    {{ form_row(form.stock, {
+        'label': 'Stock',
+    }) }}
+    {{ form_row(form.priceOfProduct, {
+        'label': 'Price',
+    }) }}
+
+    <div class="d-flex mb-2">
+        <h3>Images</h3>
+    </div>
+    <div class="images row" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
+        {% for image in form.images %}
+            <div class="col-md-4 image">
+                <img src="/images/{{ image.vars.value.name }}" alt="{{ image.vars.value.description }}" class="img img-fluid">
+                <div>{{ form_row(image.description) }}</div>
+                <div>{{ form_row(image.file, {
+                        'label': false,
+                        'required': false,
+                        'attr': {
+                            'accept': 'images/*',
+                        }
+                    }) }}</div>
+            </div>
+        {% endfor %}
+        {% if form.images|length < 3 %}
+            <div class="col-md-4 add-image-container">
+                <div class="w-100 h-100 border add-image d-flex align-items-center justify-content-center">
+                    <i class="far fa-plus-square"></i>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <input type="submit" value="Validate" class="btn btn-primary mt-4">
+    {{ form_end(form) }}
+
+{% endblock %}

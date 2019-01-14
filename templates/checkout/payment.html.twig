@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block title %}Payment{% endblock %}
+{% block body %}
+{% block breadcrumb %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item">Identification</li>
+                    <li class="breadcrumb-item">Address</li>
+                    <li class="breadcrumb-item">Delivery</li>
+                    <li class="breadcrumb-item">Summary</li>
+                    <li class="breadcrumb-item active" aria-current="page">Payment</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+
+{% block shop_content %}
+    <header class="mb-4">
+        <h1>Payment</h1>
+    </header>
+    <div class="row">
+        <div class="col-md">
+            <h4>By card</h4>
+            <div id="card-errors-container" class="my-2 card-errors-container">
+                <span class="badge badge-danger">Error</span>
+            </div>
+              <a href="{{ path('internet_store_home') }}" class="btn btn-primary">Return to shopping</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% endblock  %}

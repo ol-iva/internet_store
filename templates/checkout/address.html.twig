@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block title %}Address{% endblock %}
+
+{% block body %}
+    {% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item">Identification</li>
+                    <li class="breadcrumb-item active" aria-current="page">Address</li>
+                    <li class="breadcrumb-item">Delivery</li>
+                    <li class="breadcrumb-item">Summary</li>
+                    <li class="breadcrumb-item">Payment</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <header class="mb-4">
+        <h1>Delivery address</h1>
+    </header>
+
+    {{ form_start(address_form, { 'attr': { 'id': 'address-form' }}) }}
+    {#{% include "shop/account/address_form.html.twig" with {'address_form': address_form} %}#}
+    {{ form_end(address_form) }}
+    <input type="submit" form="address-form" value="Next" class="btn btn-primary">
+
+{% endblock %}
+
+{% endblock %}

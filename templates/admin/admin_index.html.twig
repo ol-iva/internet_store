@@ -1,0 +1,83 @@
+{% extends 'admin/admin_base_layout.html.twig' %}
+{% block title %}All Products{% endblock title %}
+
+{% block admin_content %}
+    <header class="mb-4">
+        <h1>Products</h1>
+    </header>
+
+    {{ form_start(form) }}
+    {{ form_row(form.search, {
+        'label': false,
+        'required': false,
+        'attr': { 'placeholder': 'Search' }
+    }) }}
+    {{ form_end(form) }}
+
+    <table class="table table-hover">
+        <thead class="thead-responsive">
+        <tr class="row">
+            <th class="col-md">Product</th>
+            <th class="col-md">Category</th>
+            <th class="col-md">Stock</th>
+        </tr>
+        </thead>
+        {% if products is not empty %}
+            {% for product in products %}
+                <tr class="row tr-link" data-href="{{ path('admin_product_editor', {'id': product.id }) }}">
+                    <td class="col-md">
+                        <div class="row">
+                            {% set thumb = product.images|first %}
+                            <div class="col-md">
+                                <img src="/image/{{ thumb.name }}" alt="{{ thumb.description }}" class="img img-fluid">
+                            </div>
+                            <div class="col-md">
+                                {{ product.name }}
+                            </div>
+                        </div>
+                    </td>
+                    <td class="col-md">{{ product.category }}</td>
+                    <td class="col-md">{{ product.stock }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>No results</td>
+            </tr>
+        {% endif %}
+    </table>
+
+    <nav class="mt-4">
+        <ul class="pagination">
+            {% if current_page == 1 %}
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+            {% else %}
+                <a href="{{ path('admin_all_products', {'page': current_page - 1 }) }}" class="page-link">Previous</a>
+            {% endif %}
+
+            {% for p in 1..total_pages %}
+                {% if p == current_page %}
+                    <li class="page-item active">
+                        <a href="{{ path('admin_all_products', {'page': p }) }}" class="page-link">{{ p }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a href="{{ path('admin_all_products', {'page': p }) }}" class="page-link">{{ p }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if current_page == total_pages %}
+                <li class="page-item disabled">
+                    <span class="page-link">Following</span>
+                </li>
+            {% else %}
+                <a href="{{ path('Suivant', {'page': current_page + 1 }) }}" class="page-link">Following</a>
+            {% endif %}
+        </ul>
+    </nav>
+
+{% endblock %}
+

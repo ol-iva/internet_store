@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 d-lg-none my-3 d-flex justify-content-end">
+                <button class="btn" data-toggle="collapse" data-target="#sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav id="sidebar" class="sidebar collapse d-lg-block col-12 col-lg-3 col-xl-2">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin_home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        {#{% dump(product_rows)%}#}
+                        <a class="nav-link" href="{{ path('admin_product_editor', {'id': product_rows.id}) }}">Add product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin_all_products') }}">All products</a>
+                    </li>
+                    {#<li class="nav-item">#}
+                        {#<a class="nav-link" href="{{ path('admin_order') }}">Orders</a>#}
+                    {#</li>#}
+                </ul>
+            </nav>
+
+            <main class="col-lg-9 col-xl-10 py-lg-4 py-md-3 py-2">
+                {% block admin_content %}
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+{% endblock %}

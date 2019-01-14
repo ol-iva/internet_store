@@ -1,0 +1,27 @@
+{% extends 'index.html.twig' %}
+
+{% block products %}
+    {% block titleOfCategory %}
+    <h2>{{ nameOfCurrentCategory }}</h2>
+    {% endblock %}
+    <section class="container all_products">
+        <div class="row">
+            {% for product in productsInCategory %}
+                <div class="product col-4">
+                    <img class="imageOfProduct" src="" alt="">
+                    <a href="{{ path('show_product', {'id': product.id}) }}">
+                        <h4 class="nameOfProduct">
+                            {{ product.nameOfProduct }}
+                        </h4>
+                    </a>
+                    <p class="product_price">
+                        {{ product.priceOfProduct }} &#36
+                    </p>
+                    <p class="descriptionOfProduct">
+                        {{ product.descriptionOfProduct }}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

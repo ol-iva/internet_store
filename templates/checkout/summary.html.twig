@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+{% block title %}Summary{% endblock %}
+{% block body %}
+{% block breadcrumb %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item">Identification</li>
+                    <li class="breadcrumb-item">Address</li>
+                    <li class="breadcrumb-item">Delivery</li>
+                    <li class="breadcrumb-item active" aria-current="page">Summary</li>
+                    <li class="breadcrumb-item">Payment</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+
+{% block shop_content %}
+    <header class="mb-4">
+        <h1>Summary</h1>
+    </header>
+
+    <table class="table">
+        <thead>
+        <tr class="row">
+            <th class="col-6">Product</th>
+            <th class="col">Quantity</th>
+            <th class="col">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr class="row">
+                <td class="col-6">
+                    <div class="row">
+                        {% set image = product.images|first %}
+                        <div class="col">
+                            {#<img src="/img/upload/{{ image.name }}" alt="{{ image.description }}" class="img img-fluid">#}
+                        </div>
+                        <div class="col">
+                            {{ product.name }}
+                        </div>
+                    </div>
+                </td>
+                <td class="col">{{ product.quantity }}</td>
+                <td class="col">{{ product.calcTotalPrice }} #&36</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end">
+        <div>
+            <p>
+                <span class="font-weight-bold">Subtotal:</span> {{ total_price }} €
+            </p>
+            <p>
+                <span class="font-weight-bold">Delivery:</span>
+                {% if shipping_fee == 0 %}
+                    free
+                {% else %}
+                    {{ shipping_fee }} #&36
+                {% endif %}
+            </p>
+            <p>
+                <span class="font-weight-bold">Including VAT:</span>
+                {{ price_of_vat }} #&36
+            </p>
+            <p>
+                <span class="font-weight-bold">Total to pay:</span>
+                {{ total_fee }} #&36
+            </p>
+        </div>
+    </div>
+
+    <a href="{{ path('checkout_payment') }}" class="btn btn-primary">Next</a>
+{% endblock %}
+{% endblock %}

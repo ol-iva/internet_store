@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+
+        {% block menu %}
+            <div class="main_nav_menu cat_menu_container menu_category ">
+                {% for categoryOfProducts in categoriesOfProducts %}
+                    <div class="page_menu_item categoryOfProducts">
+                        <a href="{{ path('products_in_category', {'category':categoryOfProducts.id}) }}">{{ categoryOfProducts.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endblock %}
+
+        {% block products %}
+            <section class="container all_products">
+                <div class="row">
+                {% for product in products %}
+                <div class="product col-4">
+                    <img class="imageOfProduct" src="" alt="">
+                    <a href="{{ path('show_product', {'id': product.id}) }}">
+                        <h4 class="nameOfProduct">
+                            {{ product.nameOfProduct }}
+                        </h4>
+                    </a>
+                    <p class="product_price">
+                        {{ product.priceOfProduct }} &#36
+                    </p>
+                    <p class="descriptionOfProduct">
+                        {{ product.descriptionOfProduct }}
+                    </p>
+                </div>
+                {% endfor %}
+                </div>
+            </section>
+        {% endblock %}
+        {% block productsNewest %}
+            <section class="productsNewest">
+                <h2 class="">The Latest Products In Store</h2>
+                {% for productNewest in productsNewest %}
+                    <div class="productNewest">
+                        <img src="">
+                        <h5 class="nameOfNewestProduct" style="color:rebeccapurple;">
+                            {{ productNewest.nameOfProduct }}
+                        </h5>
+                    </div>
+                {% endfor %}
+            </section>
+        {% endblock %}
+    {% endblock %}

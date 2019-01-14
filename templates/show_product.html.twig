@@ -1,0 +1,23 @@
+{% extends 'index.html.twig' %}
+{% block products %}
+    <section class="container product">
+        <div class="row">
+                <div class="product col-10">
+                    <h2 class="alert-warning nameOfProduct">
+                        {{ product.nameOfProduct }}
+                    </h2>
+                    <p class="product_price">
+                        {{ product.priceOfProduct }} &#36
+                    </p>
+
+                    <img class="imageOfProduct" src="" alt="">
+                    <p class="descriptionOfProduct">
+                        {{ product.descriptionOfProduct }}
+                    </p>
+                </div>
+        </div>
+    </section>
+{% endblock %}
+{% block productsNewest %}
+    <a href="{{ path('internet_store_home') }}" class="alert-danger">Back to full list</a>
+{% endblock %}
