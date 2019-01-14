@@ -6,37 +6,37 @@
         <h1>My cart</h1>
     </header>
     {% if products is empty %}
-        <div class="basket-empty">
+        <div class="cart-empty">
             <p>The cart is empty</p>
             <a href="{{ path('internet_store_home') }}" class="btn btn-info">Continue shopping</a>
         </div>
     {% else %}
-        <div class="basket-products mb-4">
+        <div class="cart-products mb-4">
             {% for product in products %}
-                <div class="basket-product row border-bottom py-2">
+                <div class="cart-product row border-bottom py-2">
                     {% set thumb = product.images|first %}
                     <div class="col-4 col-sm-6 col-md-2">
-                        <a href="{{ path('product_show', {'slug': product.slug}) }}">
-                            <img src="/img/upload/{{ thumb.name }}" alt="{{ thumb.description }}" class="basket-product__img img img-fluid">
+                        <a href="{{ path('product_show', {'id': product.id}) }}">
+                            <img src="/images/{{ thumb.name }}" alt="{{ thumb.description }}" class="cart-product-img img img-fluid">
                         </a>
                     </div>
                     <div class="col">
                         <div class="row">
                             <div class="col-md pb-2">
-                            <span class="basket-product__name">
-                                {{ product.name }}
+                            <span class="cart-product-name">
+                                {{ product.nameOfProduct }}
                             </span>
                             </div>
                             <div class="col-md-2 pb-2">
-                                <input class="basket-product__quantity form-control" type="number" name="quantity" data-target-id="{{ product.id }}" min="1" value="{{ product.quantity }}">
+                                <input class="cart-product-quantity form-control" type="number" name="quantity" data-target-id="{{ product.id }}" min="1" value="{{ product.quantity }}">
                             </div>
                             <div class="col-md pb-2">
-                            <span class="basket-product__price" data-target-id="{{ product.id }}">
+                            <span class="cart-product-price" data-target-id="{{ product.id }}">
                                 {{ product.calcTotalPrice }} €
                             </span>
                             </div>
                             <div class="col-md pb-2">
-                                <a href="/basket/remove/{{ product.id }}" class="basket-product__remove btn" title="Supprimer">
+                                <a href="/cart/remove/{{ product.id }}" class="cart-product-remove btn" title="Remove">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
                             </div>
@@ -47,22 +47,16 @@
         </div>
 
         <div class="d-flex">
-            <div class="basket-checkout ml-auto">
-                <p class="basket-checkout__total">
-                    Sous total: <span class="basket-checkout__total-price">{{ totalPrice }}</span> €
+            <div class="cart-checkout ml-auto">
+                <p class="cart-checkout-total">
+                    Sous total: <span class="cart-checkout-total-price">{{ totalPrice }}</span> &#36
                 </p>
                 {% if is_granted('ROLE_USER') %}
-                    <a href="{{ path('checkout_address') }}" class="basket-checkout__order btn btn-primary">Commander</a>
-                {% else %}
-                    <a href="{{ path('user_welcome', {'order': true }) }}" class="basket-checkout__order btn btn-primary">Commander</a>
+                    <a href="{{ path('checkout_address') }}" class="cart-checkout-order btn btn-primary">Order</a>
                 {% endif %}
             </div>
         </div>
 
     {% endif %}
 
-{% endblock %}
-
-{% block javascripts %}
-    <script src="js/basket.js"></script>
 {% endblock %}
