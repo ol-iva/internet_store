@@ -37,7 +37,7 @@
                     <div class="row">
                         {% set image = product.images|first %}
                         <div class="col">
-                            {#<img src="/img/upload/{{ image.name }}" alt="{{ image.description }}" class="img img-fluid">#}
+                            <img src="/images/{{ image.name }}" alt="{{ image.description }}" class="img img-fluid">
                         </div>
                         <div class="col">
                             {{ product.name }}
@@ -45,7 +45,7 @@
                     </div>
                 </td>
                 <td class="col">{{ product.quantity }}</td>
-                <td class="col">{{ product.calcTotalPrice }} #&36</td>
+                <td class="col">{{ product.calcTotalPrice }} &#36;</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -54,23 +54,23 @@
     <div class="d-flex justify-content-end">
         <div>
             <p>
-                <span class="font-weight-bold">Subtotal:</span> {{ total_price }} €
+                <span class="font-weight-bold">Subtotal:</span> {{ total_price }} &#36;
             </p>
             <p>
                 <span class="font-weight-bold">Delivery:</span>
                 {% if shipping_fee == 0 %}
                     free
                 {% else %}
-                    {{ shipping_fee }} #&36
+                    {{ shipping_fee }} &#36;
                 {% endif %}
             </p>
             <p>
                 <span class="font-weight-bold">Including VAT:</span>
-                {{ price_of_vat }} #&36
+                {{ price_of_vat }} &#36;
             </p>
             <p>
                 <span class="font-weight-bold">Total to pay:</span>
-                {{ total_fee }} #&36
+                {{ total_fee }} &#36;
             </p>
         </div>
     </div>

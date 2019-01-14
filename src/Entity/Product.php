@@ -68,17 +68,7 @@ class Product
         $this->imagesOfProduct = new ArrayCollection();
         $this->dateCreatedAt = new \DateTime();
         $this->dateDeletedAt = date_create('0000-00-00');
-        $this->imagesOfProduct = new ArrayCollection();
     }
-
-
-//      @ORM\Column(type="boolean")
-//      private $sold;
-
-//    public function __toString()
-//    {
-//        return $this->nameOfProduct ? $this->nameOfProduct : 'New';
-//    }
 
     public function setId(Product $id): self
     {
@@ -232,47 +222,3 @@ class Product
     }
 
 }
-//public function imageUpload()
-//{
-//    $file = $this->getImageFile();
-//
-//    if (!$file || !$file instanceof UploadedFile) {
-////            $this->setImage(null);
-//        return;
-//    }
-//    $fileName = uniqid() . '.' . $file->guessExtension();
-//
-//    try {
-//        $file->move(
-//            realpath('images'),
-//            $fileName
-//        );
-//        $this->trashImage();
-//
-//        $this->setImage($fileName);
-//
-//    } catch (FileException $exception) {
-//        // handle exception
-//    }
-//}
-
-// private $imageFile;
-//    /**
-//     * @ORM/PostRemove
-//     */
-//public function trashImage()
-//{
-//    $oldFile = realpath('images') . '/' . $this->getImage();
-//
-//    if (is_file($oldFile)) {
-//        unlink($oldFile);
-//    }
-//}
-//
-//public function getImagePath()
-//{
-//    if ($this->getImage()) {
-//        return "/images/{$this->getImage()}";
-//    };
-//    return "/images/1.jpg";
-//}

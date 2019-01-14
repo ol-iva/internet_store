@@ -26,9 +26,9 @@
         {% set index = shippingMethod.vars.value %}
         {% set entity = form.shippingMethod.vars.choices[index].data %}
         {% if entity.fee == 0 %}
-            {% set label = entity.name ~ ' gratuit' %}
+            {% set label = entity.name ~ ' free' %}
         {% else %}
-            {% set label = entity.name ~ ' ' ~ entity.fee ~ ' €' %}
+            {% set label = entity.name ~ ' ' ~ entity.fee ~ ' $' %}
         {% endif %}
         {{ form_row(shippingMethod, {
             'label': label,

@@ -7,7 +7,7 @@
                         {{ product.nameOfProduct }}
                     </h2>
                     <p class="product_price">
-                        {{ product.priceOfProduct }} &#36
+                        {{ product.priceOfProduct }} &#36;
                     </p>
 
                     <img class="imageOfProduct" src="" alt="">
@@ -15,6 +15,9 @@
                         {{ product.descriptionOfProduct }}
                     </p>
                 </div>
+            <div class="add-to-cart">
+                <a href="{{ path('add_to_cart', {'id':product.id}) }}" role="button">Add to cart</a>
+            </div>
         </div>
     </section>
 {% endblock %}

@@ -4,10 +4,9 @@ namespace App\Entity;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -49,17 +48,6 @@ class User extends BaseUser
 
         $this->addresses = new ArrayCollection();
         $this->orders = new ArrayCollection();
-    }
-
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {
-        $metadata->addPropertyConstraint('email', new Assert\Email([
-            'groups' => ['register'],
-        ]));
-        $metadata->addPropertyConstraint('email', new Assert\NotNull([
-            'groups' => ['register'],
-        ]));
-       $metadata->addPropertyConstraint('addresses', new Assert\Valid());
     }
 
     public function getId()
@@ -112,25 +100,7 @@ class User extends BaseUser
         return $this;
     }
 
-    public function serialize()
-    {
-        return serialize([
-            $this->id,
-            $this->username,
-            $this->password
-        ]);
-    }
-
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->password
-            ) = unserialize($serialized);
-    }
-
-    /**
+        /**
      * @return Collection|AddressOfClient[]
      */
     public function getAddresses(): Collection
