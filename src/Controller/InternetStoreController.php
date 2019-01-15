@@ -4,22 +4,38 @@ namespace App\Controller;
 
 use App\Repository\CategoryOfProductsRepository;
 use App\Repository\ProductRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\CategoryOfProducts;
 
 
-class InternetStoreController extends AbstractController
+class InternetStoreController extends Controller
 {
     /**
      * @Route("/", name="internet_store_home", methods="GET")
      */
-    public function index(ProductRepository $productRepository,
+    public function index(Request $request, ProductRepository $productRepository,
                           CategoryOfProductsRepository $categoryOfProductsRepository): Response
     {
-        $products = $productRepository->findAllWithDeleted();
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $appointmentsRepository = $em->getRepository(Appointments::class);
+
+        // Find all the data on the Appointments table, filter your query as you need
+        $allProductsQuery = $productRepository->createQueryBuilder('p')
+            ->where('p.stock != :stock')
+            ->setParameter('stock', '0')
+            ->getQuery();
+
+        /* @var $paginator \Knp\Component\Pager\Paginator */
+        $paginator  = $this->get('knp_paginator');
+
+        // Paginate the results of the query
+        $products = $paginator->paginate($allProductsQuery, $request->query->getInt('page', 1),3);
+
         $categoriesOfProducts = $categoryOfProductsRepository->findAll();
         $productsNewest = $productRepository->findNewest(4);
 
